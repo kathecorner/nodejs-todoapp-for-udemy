@@ -7,6 +7,7 @@ require("dotenv").config();
 const PORT = 3000;
 
 //ミドルウェア
+app.use(express.static("./puclic"));
 app.use(express.json());
 
 app.use("/api/v1/tasks", taskRoute);
