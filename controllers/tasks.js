@@ -2,10 +2,16 @@ const getAllTasks = (req, res) => {
   res.send("全てのタスクをファイルから取得しました");
 };
 const createTask = (req, res) => {
-  res.send("タスクをファイルから作成しました");
+  const createTask = req.body;
+  // res.send("タスクをファイルから作成しました");
+  res.json(createTask);
 };
 const getSingleTask = (req, res) => {
-  res.send("１つのタスクをファイルから取得しました");
+  const getSingleTask = {
+    id: req.params.id,
+  };
+  // res.send("１つのタスクをファイルから取得しました");
+  res.json(getSingleTask);
 };
 const updateTask = (req, res) => {
   res.send("タスクをファイルから更新しました");
