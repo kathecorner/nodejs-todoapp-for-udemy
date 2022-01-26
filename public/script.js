@@ -23,21 +23,22 @@ const showTasks = async () => {
       .map((task) => {
         //console.log(task.name);
         const { completed, _id: taskID, name } = task;
-        return `<div class="single-task ${completed && "task-completed"}">
-      <h5><span><i class="far fa-check-circle"></i></span>${name}</h5>
-      <div class="task-links">
+        return;
+        `<div class="single-task ${completed && "task-completed"}">
+            <h5><span><i class="far fa-check-circle"></i></span>${name}</h5>
+        <div class="task-links">
 
-      <!-- edit link -->
-<a href="task.html?id=${taskID}"  class="edit-link">
-<i class="fas fa-edit"></i>
-</a>
+        <!-- edit link -->
+        <a href="task.html?id=${taskID}"  class="edit-link">
+           <i class="fas fa-edit"></i>
+        </a>
 
-<!-- delete btn -->
-<button type="button" class="delete-btn" data-id="${taskID}">
-<i class="fas fa-trash"></i>
-</button>
-</div>
-</div>`;
+        <!-- delete btn -->
+        <button type="button" class="delete-btn" data-id="${taskID}">
+            <i class="fas fa-trash"></i>
+        </button>
+        </div>
+        </div>`;
       })
       .join("");
     tasksDOM.innerHTML = allTasks;
@@ -48,4 +49,43 @@ const showTasks = async () => {
   loadingDOM.style.visibility = "hidden";
 };
 
-// showTasks(); //最初から全タスクを取得
+showTasks(); //最初から全タスクを取得
+
+//post
+formDOM.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = taskInputDOM.value;
+
+  try {
+    await axios.post("/api/v1/tasks/", { name: name });
+    showTasks();
+    taskInputDOM.value = "";
+    formAlertDOM.style.display = "block";
+    formAlertDOM.textContent = `タスクを追加しました`;
+    formAlertDOM.classList.add("text-success");
+  } catch (error) {
+    formAlertDOM.style.display = "block";
+    formAlertDOM.innerHTML = `無効です。もう一度試してください。`;
+  }
+  setTimeout(() => {
+    formAlertDOM.style.display = "none";
+    formAlertDOM.classList.remove("text-success");
+  }, 3000);
+});
+
+//delete
+tasksDOM.addEventListener("click", async (e) => {
+  const element = e.target;
+  // console.log(element.parentElement);
+  if (element.parentElement.classList.contains("delete-btn")) {
+    loadingDOM.style.visibility = "visible";
+    const id = element.parentElement.dataset.id;
+    try {
+      await axios.delete(`/api/v1/tasks/${id}`);
+      showTasks();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  loadingDOM.style.visibility = "hidden";
+});
