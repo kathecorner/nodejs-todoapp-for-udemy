@@ -42,10 +42,11 @@ const getSingleTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   // res.send("タスクをファイルから更新しました");
+  const { id: taskID } = req.params;
   try {
-    const updateTask = await Task.findOneAndUpdate(req.params.id, req.body, {
+    const updateTask = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
       new: true,
-    });
+    }); //第一引数にreq.params.idはダメ見たい。
 
     if (!updateTask) {
       return res.status(404).json(`_id:${req.params.id}は存在しません`);

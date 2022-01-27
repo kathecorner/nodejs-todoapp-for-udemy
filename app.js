@@ -4,7 +4,7 @@ const taskRoute = require("./routes/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 
-const PORT = 3000;
+const PORT = 5000;
 
 //ミドルウェア
 app.use(express.static("./public")); //これでHTMLとか読み込める

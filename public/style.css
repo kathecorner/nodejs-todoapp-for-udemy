@@ -106,7 +106,6 @@ form {
     border-radius: var(--borderRadius);
     box-shadow: var(--shadow-2);
     padding: 2rem 2.5rem;
-    text-align: right;
   }
 
 input,
@@ -218,4 +217,54 @@ textarea {
 }
 .delete-btn {
   color: var(--red-dark);
+}
+
+
+/*************
+    タスク編集
+*************/
+.task-edit-completed {
+  width: auto;
+}
+
+.single-task-form .form-alert {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.single-task-form h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.single-task-form p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.single-task-form .form-control {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  justify-items: start;
+  gap: 0 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.text-success {
+  color: var(--green-dark);
+}
+
+.back-link {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 6rem;
+  background: var(--black);
+  text-decoration: none;
+}
+.back-link:hover {
+  background: var(--black);
+  opacity: 0.75;
 }
