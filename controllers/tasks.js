@@ -45,7 +45,7 @@ const updateTask = async (req, res) => {
   const { id: taskID } = req.params;
   try {
     const updateTask = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
-      new: true,
+      new: true, //更新後の情報が見れる。
     }); //第一引数にreq.params.idはダメ見たい。
 
     if (!updateTask) {
