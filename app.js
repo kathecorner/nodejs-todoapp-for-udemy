@@ -12,13 +12,15 @@ app.use(express.json());
 
 app.use("/api/v1/tasks", taskRoute);
 
+console.log(env.DEV_MONGO_URL);
+
 const start = async () => {
   try {
     await connectDB(process.env.DEV_MONGO_URL || process.env.MONGODB_URI);
     app.listen(PORT, console.log(`サーバーが起動しました`));
   } catch (error) {
     console.log(error);
-    console.log(env.DEV_MONGO_URL);
+    
   }
 };
 
