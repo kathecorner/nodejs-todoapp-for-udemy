@@ -18,6 +18,7 @@ const start = async () => {
     app.listen(PORT, console.log(`サーバーが起動しました`));
   } catch (error) {
     console.log(error);
+    console.log(env.DEV_MONGO_URL);
   }
 };
 
